@@ -1,33 +1,33 @@
-const { Cliente, Articulo } = require("./models.js");
+const { armas, municion } = require("./models.js");
 
 
-// ------- CLIENTES
+// ------- Armas
 
-exports.readClientes = (req, res) =>
-    Cliente.find({}, (err, data) => {
+exports.readArmas = (req, res) =>
+    armas.find({}, (err, data) => {
         if (err) res.json({ error: err });
         else     res.json(data);
     });
 
 
-exports.readCliente = (req, res) =>
-    Cliente.findOne({ _id: req.params.id }, (err, data) => {
+exports.readArma = (req, res) =>
+    armas.findOne({ _id: req.params.id }, (err, data) => {
         if (err) res.json({ error: err });
         else     res.json(data);
     });
 
 
-exports.deleteCliente = (req, res) =>
-    Cliente.findOneAndRemove({ _id: req.params.id }, (err, data) => {
+exports.deleteArma = (req, res) =>
+    armas.findOneAndRemove({ _id: req.params.id }, (err, data) => {
         if (err) res.json({ error: err });
         else     res.json(data);
     });
 
 
-exports.updateCliente = (req, res) =>
-    Cliente.findOneAndUpdate(
+exports.updateArma = (req, res) =>
+    armas.findOneAndUpdate(
         { _id: req.params.id },
-        { $set: { nombre: req.body.nombre, apellidos: req.body.apellidos } }, 
+        { $set: { modelo: req.body.modelo, calibre: req.body.calibre } }, 
         (err, data) => {
             if (err) res.json({ error: err });
             else     res.json(data);
@@ -35,8 +35,8 @@ exports.updateCliente = (req, res) =>
     );
 
 
-exports.createCliente = (req, res) =>
-    new Cliente({ nombre: req.body.nombre, apellidos: req.body.apellidos })
+exports.createArma = (req, res) =>
+    new armas({ modelo: req.body.modelo, calibre: req.body.calibre })
     .save((err, data) => {
         if (err) res.json({ error: err });
         else     res.json(data);
@@ -44,34 +44,34 @@ exports.createCliente = (req, res) =>
 
 
 
-// ------ ARTÍCULOS
+// ------ Municion
 
-exports.readArticulos = (req, res) =>
-    Articulo.find({}, (err, data) => {
+exports.readMuniciones = (req, res) =>
+    municion.find({}, (err, data) => {
         if (err) res.json({ error: err });
         else     res.json(data);
     });
 
 
-exports.readArticulo = (req, res) =>
-    Articulo.findOne({ _id: req.params.id }, (err, data) => {
+exports.readMunicion = (req, res) =>
+    municion.findOne({ _id: req.params.id }, (err, data) => {
         if (err) res.json({ error: err });
         else     res.json(data);
     });
 
 
-exports.deleteArticulo = (req, res) =>
-    Articulo.findOneAndRemove({ _id: req.params.id }, (err, data) => {
+exports.deleteMunicion = (req, res) =>
+    municion.findOneAndRemove({ _id: req.params.id }, (err, data) => {
         if (err) res.json({ error: err });
         else     res.json(data);
     });
 
 
 
-exports.updateArticulo = (req, res) =>
-    Articulo.findOneAndUpdate(
+exports.updateMunicion = (req, res) =>
+    municion.findOneAndUpdate(
         { _id: req.params.id },
-        { $set: { nombre: req.body.nombre, precio: req.body.precio } }, 
+        { $set: { calibre: req.body.calibre, tipo: req.body.tipo } }, 
         (err, data) => {
             if (err) res.json({ error: err });
             else     res.json(data);
@@ -79,8 +79,8 @@ exports.updateArticulo = (req, res) =>
     );
 
 
-exports.createArticulo = (req, res) =>
-    new Articulo({ nombre: req.body.nombre, precio: req.body.precio })
+exports.createMunicion = (req, res) =>
+    new municion({ calibre: req.body.calibre, tipo: req.body.tipo })
     .save((err, data) => {
         if (err) res.json({ error: err });
         else     res.json(data);
